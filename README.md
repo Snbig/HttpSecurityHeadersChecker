@@ -26,7 +26,7 @@ Enter the below command :
 php.exe HttpSecurityHeadersChecker.php
 ```
 # Running the test :
-![alt text](https://pasteboard.co/images/H5nMCEp.png/download)
+![alt text](https://pasteboard.co/images/H5nNgFX.png/download)
 
 ## Tip :
 * **Use exact target URL**<br>
