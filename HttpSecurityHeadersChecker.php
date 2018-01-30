@@ -5,6 +5,8 @@
  * License : This project is licensed under the Apache License 2.0 License .
  * Date : 1/31/2018
  */
+
+//Tips for setting Security Http Headers to the Webservers
 $tip0 = <<<_END
 [?]Tips
 
@@ -188,13 +190,14 @@ _END;
 
 do
 {
+    //Get Target URL
     echo "[*] Enter URL (http/https)://[www.]google.com : ";
     $url = trim(fgets(STDIN));
 
     if(!empty($url)) {
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
+        if (filter_var($url, FILTER_VALIDATE_URL)) { //Check the given url is valid or not .
             $host = parse_url($url);
-            if (GetServerStatus($host['host'], 80)) {
+            if (GetServerStatus($host['host'], 80)) { //Check Website availability .
                 $ch = curl_init();
                 $headers = [];
                 curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
@@ -215,13 +218,15 @@ do
                         return $len;
                     }
                 );
-                curl_exec($ch);
+                curl_exec($ch); //Send HTTP request to the specified target .
 
 
+                //Check Strict Transport Security (HSTS) header
                 if (array_key_exists("strict-transport-security",$headers)) {
                     splitter();
                     echo color("[+] Secure : Strict Transport Security (HSTS) is Enabled .",0);
                     print_array(color("\t\t\tStrict Transport Security (HSTS)",4),$headers["strict-transport-security"]);
+                    splitter();
                 }
                 else {
                     splitter();
@@ -232,6 +237,7 @@ do
 
 
 
+                //Check X-Frame-Options header
                 if (array_key_exists("x-frame-options",$headers)){
                     $frame = $headers['x-frame-options'][0];
                     if($frame == "DENY") {
@@ -262,6 +268,7 @@ do
                 }
 
 
+                //Check X-XSS-Protection header
                 if (array_key_exists("x-xss-protection",$headers)){
                     $xss = $headers['x-xss-protection'][0];
                     if(preg_match("/\b1; report=\b/",$xss)){
@@ -291,6 +298,7 @@ do
                 }
 
 
+                //Check X-Content-Type-Options header
                 if(array_key_exists("x-content-type-options",$headers)){
                     echo color("[+++] Secure : Browsers will refuse to load the styles and scripts in case they have an incorrect MIME-type .",0);
                     print_array(color("\t\t\t\tX-Content-Type-Options",4),$headers["x-content-type-options"]);
@@ -303,6 +311,7 @@ do
                 }
 
 
+                //Check Public Key Pinning Extension for HTTP (HPKP) header
                 if(array_key_exists("public-key-pins",$headers)){
                     echo color("[+++] Secure : The website is SECURE against the Man-In-The-Middle attack (MITM attack) .",0);
                     print_array(color("\t\tPublic Key Pinning Extension for HTTP (HPKP)",4),$headers["public-key-pins"]);
@@ -315,6 +324,7 @@ do
                 }
 
 
+                //Check Content-Security-Policy (CSP) header
                 if(array_key_exists("content-security-policy",$headers)){
                     echo color("[+++] Secure : CSP prevents a wide range of attacks, including Cross-site scripting and other cross-site injections .",0);
                     print_array(color("\t\t\tContent-Security-Policy (CSP)",4),$headers["content-security-policy"]);
@@ -327,6 +337,7 @@ do
                 }
 
 
+                //Check X-Permitted-Cross-Domain-Policies header
                 if(array_key_exists("x-permitted-cross-domain-policies",$headers)) {
                     $xpcdp = $headers["x-permitted-cross-domain-policies"][0];
                     if (preg_match("/all/", $xpcdp)) {
@@ -348,6 +359,7 @@ do
                 }
 
 
+                //Check Referrer-Policy header
                 if(array_key_exists("referrer-policy",$headers)){
                     if(preg_match("/unsafe-url/",$headers["referrer-policy"][0])){
                         echo color("[-] InSecure : The website sends a full URL (stripped from parameters) in Referer header when performing a a same-origin or cross-origin request .",1); splitter();
@@ -366,6 +378,7 @@ do
                 }
 
 
+                //Check Expect-CT header
                 if(array_key_exists("expect-ct",$headers)){
                     echo color("[+++] Secure :  The website indicates that browsers should evaluate connections to the host emitting the header for Certificate Transparency compliance .",0);
                     print_array(color("\t\t\t\t\tExpect-CT",4),$headers["expect-ct"]);
@@ -383,6 +396,8 @@ do
         else echo color("[!] The given URL is not valid .\n",5); $url="";
     }
 }while(empty($url));
+
+//Website status checker function
 function GetServerStatus($site, $port)
 {
     $fp = @fsockopen($site, $port, $errno, $errstr, 2);
@@ -391,6 +406,8 @@ function GetServerStatus($site, $port)
     else
         return true;
 }
+
+//Printing array function
 function print_array($title,$array){
 
     if(is_array($array)){
@@ -405,9 +422,13 @@ function print_array($title,$array){
 
     }else echo "";
 }
+
+//Line splitter function
 function splitter(){
     echo color("\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n",2);
 }
+
+//Line colors function
 function color($string,$num){
     switch ($num){
         case 0:
