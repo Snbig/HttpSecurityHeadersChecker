@@ -2,11 +2,11 @@
 
 Http Security Headers Checker Tools written in PHP Cli + Useful Tips to set Http Security Headers
 
-### Prerequisites
+### Prerequisites :
 
 To use this tool you need to insatll PHP CLI . (PHP >=5 is OK)
 
-### Installing PHP CLI
+### Installing PHP CLI :
 <b>Linux</b> : PHP CLI Pre-installed Linux.<br><br>
 <b>Windows</b> : <br>
 Go to : windows.php.net/download<br>
@@ -25,7 +25,7 @@ Enter the below command :
 ```
 php.exe HttpSecurityHeadersChecker.php
 ```
-# Running the tests
+# Running the test :
 ![alt text](https://pasteboard.co/images/H5n5Pnl.png/download)
 
 ## License
