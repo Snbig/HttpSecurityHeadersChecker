@@ -50,4 +50,4 @@ http**s** is not as same as http And gives different results .
 
 ## License
 
-This project is licensed under the Apache License 2.0 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache License 2.0 License - see the [LICENSE.md](LICENSE) file for details
