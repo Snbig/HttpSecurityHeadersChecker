@@ -2,6 +2,17 @@
 
 **Http Security Headers Checker Tools written in PHP Cli + Useful Tips to set Http Security Headers in the most Webservers (Apache,nginx,IIS,...)**
 
+## Response Headers
+The following contains a list of HTTP response headers related to security , declared by [OWASP](https://www.owasp.org/index.php/OWASP_Secure_Headers_Project).
+* **HTTP Strict Transport Security (HSTS)**
+* **Public Key Pinning Extension for HTTP (HPKP)**
+* **X-Frame-Options**
+* **X-XSS-Protection**
+* **X-Content-Type-Options**
+* **Content-Security-Policy**
+* **X-Permitted-Cross-Domain-Policies**
+* **Referrer-Policy**
+* **Expect-CT**
 ### Prerequisites :
 
 To use this tool you need to insatll PHP CLI . (_PHP >=5 is OK_)
