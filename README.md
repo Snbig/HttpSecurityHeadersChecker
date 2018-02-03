@@ -32,12 +32,26 @@ php HttpSecurityHeadersChecker.php
 ```
 * **Windows** :
 Open CMD (Win + R keys on your keyboard. Then, type cmd or cmd.exe and press Enter).<br>
-Enter the below command :
+* Enter the below command :
 ```
 php.exe HttpSecurityHeadersChecker.php
 ```
+* Enter website exact URL :
+```
+[*] Enter URL (http/https)://[www.]google.com : https://github.com
+```
+* Enter "Y" for following website redirection or "N" to disable it.
+```
+[*] Do you want to follow redirection ? (Y/N) : Y
+```
+* If you want to keep your anonymity , use PROXY.
+To set **Socks5/Tor/Http** proxy , enter 1,2 or 3.
+```
+[*] Do you want to use proxy ? ([0] => No proxy , [1] => Socks5 , [2] => Tor , [3] =>Http) : 2
+```
+* _Enable Tor on your PC before using Tor as socks5 proxy ._
 # Running the test :
-![alt text](https://pasteboard.co/images/H5Ub1Ni.png/download)
+![alt text](https://pasteboard.co/images/H5Ww5sR.png/download)
 
 ## Tip :
 * **Use exact target URL**<br>
