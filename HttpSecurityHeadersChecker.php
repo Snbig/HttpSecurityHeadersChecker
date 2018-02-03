@@ -240,17 +240,17 @@ do
                 //Check X-Frame-Options header
                 if (array_key_exists("x-frame-options",$headers)){
                     $frame = $headers['x-frame-options'][0];
-                    if($frame == "DENY") {
+                    if($frame == "deny") {
                         echo color("[+++] Secure : The page cannot be displayed in a frame, regardless of the site attempting to do so .",0);
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
                         splitter();
                     }
-                    elseif ($frame == "SAMEORIGIN") {
+                    elseif ($frame == "sameorigin") {
                         echo color("[++] Secure : The page can only be displayed in a frame on the same origin as the page itself .",0);
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
                         splitter();
                     }
-                    elseif (preg_match("/ALLOW-FROM/",$frame)) {
+                    elseif (preg_match("/ALLOW-FROM/i",$frame)) {
                         $uri = substr($frame,11);
                         echo color("[+] Secure : The page can only be displayed in a frame on the [ $uri ] origin .",0);
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
