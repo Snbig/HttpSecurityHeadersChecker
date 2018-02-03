@@ -374,6 +374,7 @@ do
                 }
                 else {
                     echo color("[-] InSecure : There is no policy for sending Referer header information when performing a a same-origin or cross-origin request .", 1);
+                    echo color($tip7, 6);
                     splitter();
                 }
 
