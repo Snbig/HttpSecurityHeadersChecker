@@ -37,7 +37,7 @@ Enter the below command :
 php.exe HttpSecurityHeadersChecker.php
 ```
 # Running the test :
-![alt text](https://pasteboard.co/images/H5Tu9HN.png/download)
+![alt text](https://pasteboard.co/images/H5Ub1Ni.png/download)
 
 ## Tip :
 * **Use exact target URL**<br>
