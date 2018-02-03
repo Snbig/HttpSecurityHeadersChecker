@@ -158,13 +158,13 @@ $tip7 = <<<_END
 Referrer-Policy allows control/restriction of the amount of information present in the referral header for links away from your page—the URL path or even if the header is sent at all.
 
 Apache:
-Header set Referrer-Policy: "same-origin"
+Header set Referrer-Policy: "sameorigin"
 
 nginx:
-add_header Referrer-Policy "same-origin";
+add_header Referrer-Policy "sameorigin";
 
 lighttpd:
-setenv.add-response-header = ("Referrer-Policy" => "same-origin",)
+setenv.add-response-header = ("Referrer-Policy" => "sameorigin",)
 
 IIS:
 Visit https://scotthelme.co.uk/hardening-your-http-response-headers/
@@ -362,18 +362,18 @@ do
                 //Check Referrer-Policy header
                 if(array_key_exists("referrer-policy",$headers)){
                     if(preg_match("/unsafe-url/",$headers["referrer-policy"][0])){
-                        echo color("[-] InSecure : The website sends a full URL (stripped from parameters) in Referer header when performing a a same-origin or cross-origin request .",1); splitter();
+                        echo color("[-] InSecure : The website sends a full URL (stripped from parameters) in Referer header when performing a same-origin or cross-origin request .",1); splitter();
                         print_array(color("\t\t\t\tReferrer-Policy",4),$headers["referrer-policy"]);
                         splitter();
                     }
                     else {
-                        echo color("[+++] Secure : The website sanitize Referer header information when performing a a same-origin or cross-origin request .",0);
+                        echo color("[+++] Secure : The website sanitize Referer header information when performing a same-origin or cross-origin request .",0);
                         print_array(color("\t\t\t\tReferrer-Policy",4),$headers["referrer-policy"]);
                         splitter();
                     }
                 }
                 else {
-                    echo color("[-] InSecure : There is no policy for sending Referer header information when performing a a same-origin or cross-origin request .", 1);
+                    echo color("[-] InSecure : There is no policy for sending Referer header information when performing a same-origin or cross-origin request .", 1);
                     echo color($tip7, 6);
                     splitter();
                 }
