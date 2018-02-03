@@ -281,7 +281,7 @@ do
                         splitter();
                     }
                     elseif (preg_match("/\b1; mode=\b/i",$xss)){
-                        echo color("[++] Secure : Rather than sanitize the page, when a XSS attack is detected, browsers will prevent rendering of the page .",0);
+                        echo color("[++] Secure : Rather than the browser sanitizes the page when an XSS attack is detected, it will prevent rendering of the page .",0);
                         print_array(color("\t\t\t\t\tX-XSS-Protection",4),$headers["x-xss-protection"]);
                         splitter();
                     }
