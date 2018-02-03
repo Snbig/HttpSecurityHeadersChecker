@@ -197,13 +197,19 @@ do
     //Get Target URL
     echo "[*] Enter URL (http/https)://[www.]google.com : ";
     $url = trim(fgets(STDIN));
+    echo "[*] Do you want to follow redirection ? (Y/N) : ";
+    $answer = trim(fgets(STDIN));
 
     if(!empty($url)) {
         if (filter_var($url, FILTER_VALIDATE_URL)) { //Check the given url is valid or not .
             $host = parse_url($url);
             if (GetServerStatus($host['host'], 80)) { //Check Website availability .
                 $ch = curl_init();
+                if(preg_match("/\by\b/i",$answer))
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                 $headers = [];
+                isset($host['path'])?curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host'].$host['path'])
+                    :curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
                 curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/4.0 (X11; Linux x86_64) AppleWebKit/434.24 (KHTML, like Gecko) Ubuntu/10.04 Chromium/11.0.696.0 Chrome/11.0.696.0 Safari/434.24.');
