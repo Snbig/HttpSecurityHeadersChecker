@@ -244,17 +244,17 @@ do
                 //Check X-Frame-Options header
                 if (array_key_exists("x-frame-options",$headers)){
                     $frame = $headers['x-frame-options'][0];
-                    if($frame == "deny") {
+                    if(preg_match("/deny/i",$frame)) {
                         echo color("[+++] Secure : The page cannot be displayed in a frame, regardless of the site attempting to do so .",0);
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
                         splitter();
                     }
-                    elseif ($frame == "sameorigin") {
+                    elseif (preg_match("/sameorigin/i",$frame)) {
                         echo color("[++] Secure : The page can only be displayed in a frame on the same origin as the page itself .",0);
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
                         splitter();
                     }
-                    elseif (preg_match("/allow-from/",$frame)) {
+                    elseif (preg_match("/allow-from/i",$frame)) {
                         $uri = substr($frame,11);
                         echo color("[+] Secure : The page can only be displayed in a frame on the [ $uri ] origin .",0);
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
@@ -275,12 +275,12 @@ do
                 //Check X-XSS-Protection header
                 if (array_key_exists("x-xss-protection",$headers)){
                     $xss = $headers['x-xss-protection'][0];
-                    if(preg_match("/\b1; report=\b/",$xss)){
+                    if(preg_match("/\b1; report=\b/i",$xss)){
                         echo color("[+++] Secure : If a cross-site scripting attack (XSS) is detected, browsers will sanitize the page and report the violation .",0);
                         print_array(color("\t\t\t\t\tX-XSS-Protection",4),$headers["x-xss-protection"]);
                         splitter();
                     }
-                    elseif (preg_match("/\b1; mode=\b/",$xss)){
+                    elseif (preg_match("/\b1; mode=\b/i",$xss)){
                         echo color("[++] Secure : Rather than sanitize the page, when a XSS attack is detected, browsers will prevent rendering of the page .",0);
                         print_array(color("\t\t\t\t\tX-XSS-Protection",4),$headers["x-xss-protection"]);
                         splitter();
@@ -344,7 +344,7 @@ do
                 //Check X-Permitted-Cross-Domain-Policies header
                 if(array_key_exists("x-permitted-cross-domain-policies",$headers)) {
                     $xpcdp = $headers["x-permitted-cross-domain-policies"][0];
-                    if (preg_match("/all/", $xpcdp)) {
+                    if (preg_match("/all/i", $xpcdp)) {
                         echo color("[-] InSecure : All policy files on this domain are allowed .",1); splitter();
                         print_array(color("\t\t\tX-Permitted-Cross-Domain-Policies",4),$headers["x-permitted-cross-domain-policies"]);
                         echo color($tip6,6);
@@ -365,7 +365,8 @@ do
 
                 //Check Referrer-Policy header
                 if(array_key_exists("referrer-policy",$headers)){
-                    if(preg_match("/unsafe-url/",$headers["referrer-policy"][0])){
+                    $ref_policy = $headers["referrer-policy"][0];
+                    if(preg_match("/unsafe-url/i",$ref_policy)){
                         echo color("[-] InSecure : The website sends a full URL (stripped from parameters) in Referer header when performing a same-origin or cross-origin request .",1); splitter();
                         print_array(color("\t\t\t\tReferrer-Policy",4),$headers["referrer-policy"]);
                         splitter();
