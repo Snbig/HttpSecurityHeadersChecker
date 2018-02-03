@@ -197,21 +197,83 @@ do
     //Get Target URL
     echo "[*] Enter URL (http/https)://[www.]google.com : ";
     $url = trim(fgets(STDIN));
+
+    //Follow redirection or not 
     echo "[*] Do you want to follow redirection ? (Y/N) : ";
-    $answer = trim(fgets(STDIN));
+    $answer = strtolower(trim(fgets(STDIN)));
+    while ($answer != "y" && $answer != "n") {
+        echo color("[!] Enter Y or N : ",5);
+        $answer = strtolower(trim(fgets(STDIN)));
+    }
+
+    //Set Proxy
+    echo "[*] Do you want to use proxy ? ([0] => No proxy , [1] => Socks5 , [2] => Tor , [3] =>Http) : ";
+    $answer2 = trim(fgets(STDIN));
+    switch ($answer2){
+        case 0:
+            break;
+        case "2":
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                $proxy = "127.0.0.1:9150";
+            }
+            else $proxy = "127.0.0.1:9050";
+            break;
+        case "1":
+        case "3":
+        echo "[*] Enter your proxy address : (example: 127.0.0.1:8888) : ";
+        $proxy = trim(fgets(STDIN));
+        break;
+        default :
+            while ($answer2 != 0 || $answer2 != 1 || $answer2 != 2 || $answer2 != 3) {
+                echo color("[!] Enter 0,1,2 or 3 : ", 5);
+                $answer2 = trim(fgets(STDIN));
+            }
+            if ($answer2 = "1" || $answer2 == "3"){
+                echo "[*] Enter your proxy address : (example: 127.0.0.1:8888) : ";
+                $proxy = trim(fgets(STDIN));
+            }
+    }
 
     if(!empty($url)) {
+        global $proxy;
         if (filter_var($url, FILTER_VALIDATE_URL)) { //Check the given url is valid or not .
             $host = parse_url($url);
             if (GetServerStatus($host['host'], 80)) { //Check Website availability .
                 $ch = curl_init();
-                if(preg_match("/\by\b/i",$answer))
+
+                //Check proxy is available or not
+                $exp = explode(":",$proxy);
+                if (!GetServerStatus($exp[0], $exp[1])) {
+                    die(color("[!] Unable to get connection from the proxy server .",5));
+                }
+
+
+                if($answer == "y") {
                     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                }
+
+                if($answer2 == "2") {
+                        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+                    curl_setopt($ch, CURLOPT_PROXY, $proxy);
+                }
+
+                if($answer2 == "1"){
+                    curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+                    curl_setopt($ch, CURLOPT_PROXY, $proxy);
+                }
+
+                if($answer2 == "3"){
+                    curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+                    curl_setopt($ch, CURLOPT_PROXY, $proxy);
+                }
+
                 $headers = [];
                 isset($host['path'])?curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host'].$host['path'])
                     :curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
                 curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
                 curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/4.0 (X11; Linux x86_64) AppleWebKit/434.24 (KHTML, like Gecko) Ubuntu/10.04 Chromium/11.0.696.0 Chrome/11.0.696.0 Safari/434.24.');
                 curl_setopt($ch, CURLOPT_HEADERFUNCTION,
                     function($curl, $header) use (&$headers)
