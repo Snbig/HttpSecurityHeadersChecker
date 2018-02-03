@@ -135,7 +135,7 @@ _END;
 $tip6 = <<<_END
 [?]Tips
 
-X-Permitted-Cross-Domain-Policies. A cross-domain policy file is an XML document that grants a web client, such as Adobe Flash Player or Adobe Acrobat (though not necessarily limited to these), permission to handle data across domains.
+X-Permitted-Cross-Domain-Policies is an XML document that grants a web client, such as Adobe Flash Player or Adobe Acrobat (though not necessarily limited to these), permission to handle data across domains.
 
 Add appropriate snippet into configuration file.
 
@@ -157,14 +157,16 @@ $tip7 = <<<_END
 
 Referrer-Policy allows control/restriction of the amount of information present in the referral header for links away from your page—the URL path or even if the header is sent at all.
 
+Add appropriate snippet into configuration file.
+
 Apache:
-Header set Referrer-Policy: "sameorigin"
+Header set Referrer-Policy: "SAMEORIGIN"
 
 nginx:
-add_header Referrer-Policy "sameorigin";
+add_header Referrer-Policy "SAMEORIGIN";
 
 lighttpd:
-setenv.add-response-header = ("Referrer-Policy" => "sameorigin",)
+setenv.add-response-header = ("Referrer-Policy" => "SAMEORIGIN",)
 
 IIS:
 Visit https://scotthelme.co.uk/hardening-your-http-response-headers/
@@ -174,6 +176,8 @@ $tip8 = <<<_END
 [?]Tips
 
 Certificate Transparency policy means that user-agents, e.g. browsers should block an access to a website with a certificate that is not registered in public CT logs (after October 2017).
+
+Add appropriate snippet into configuration file.
 
 Apache:
 Header set Expect-CT: "enforce"
