@@ -220,9 +220,9 @@ do
             break;
         case "1":
         case "3":
-        echo "[*] Enter your proxy address : (example: 127.0.0.1:8888) : ";
-        $proxy = trim(fgets(STDIN));
-        break;
+            echo "[*] Enter your proxy address : (example: 127.0.0.1:8888) : ";
+            $proxy = trim(fgets(STDIN));
+            break;
         default :
             while ($answer2 != 0 || $answer2 != 1 || $answer2 != 2 || $answer2 != 3) {
                 echo color("[!] Enter 0,1,2 or 3 : ", 5);
@@ -256,7 +256,7 @@ do
                 }
 
                 if($answer2 == "2") {
-                        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+                    curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
                     curl_setopt($ch, CURLOPT_PROXY, $proxy);
                 }
 
@@ -477,7 +477,7 @@ do
 
 //Website status checker function
 function is_online($url){
-    $response = file_get_contents("http://www.checksite.us/?url=$url", "r");
+    $response = file_get_contents("http://www.checksite.us/?url=$url");
     if(preg_match("/\bWe can access\b/i",$response))
         return true;
     return false;
