@@ -160,13 +160,13 @@ Referrer-Policy allows control/restriction of the amount of information present 
 Add appropriate snippet into configuration file.
 
 Apache:
-Header set Referrer-Policy: "SAMEORIGIN"
+Header set Referrer-Policy: "same-origin"
 
 nginx:
-add_header Referrer-Policy "SAMEORIGIN";
+add_header Referrer-Policy "same-origin";
 
 lighttpd:
-setenv.add-response-header = ("Referrer-Policy" => "SAMEORIGIN",)
+setenv.add-response-header = ("Referrer-Policy" => "same-origin",)
 
 IIS:
 Visit https://scotthelme.co.uk/hardening-your-http-response-headers/
