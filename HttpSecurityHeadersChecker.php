@@ -198,7 +198,7 @@ do
     echo "[*] Enter URL (http/https)://[www.]google.com : ";
     $url = trim(fgets(STDIN));
 
-    //Follow redirection or not 
+    //Follow redirection
     echo "[*] Do you want to follow redirection ? (Y/N) : ";
     $answer = strtolower(trim(fgets(STDIN)));
     while ($answer != "y" && $answer != "n") {
@@ -234,17 +234,20 @@ do
             }
     }
 
+    //processing data
     if(!empty($url)) {
         global $proxy;
         if (filter_var($url, FILTER_VALIDATE_URL)) { //Check the given url is valid or not .
             $host = parse_url($url);
-            if (GetServerStatus($host['host'], 80)) { //Check Website availability .
+            if (is_online($host['host'])) { //Check Website availability .
                 $ch = curl_init();
 
                 //Check proxy is available or not
-                $exp = explode(":",$proxy);
-                if (!GetServerStatus($exp[0], $exp[1])) {
-                    die(color("[!] Unable to get connection from the proxy server .",5));
+                if($answer2 != "0"){
+                    $exp = explode(":", $proxy);
+                    if (!GetServerStatus($exp[0], $exp[1])) {
+                        die(color("[!] Unable to get connection from the proxy server .", 5));
+                    }
                 }
 
 
@@ -471,7 +474,17 @@ do
     }
 }while(empty($url));
 
+
 //Website status checker function
+function is_online($url){
+    $response = file_get_contents("http://www.checksite.us/?url=$url", "r");
+    if(preg_match("/\bWe can access\b/i",$response))
+        return true;
+    return false;
+}
+
+
+//Server status checker function
 function GetServerStatus($site, $port)
 {
     $fp = @fsockopen($site, $port, $errno, $errstr, 2);
