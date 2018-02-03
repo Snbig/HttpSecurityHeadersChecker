@@ -250,7 +250,7 @@ do
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
                         splitter();
                     }
-                    elseif (preg_match("/ALLOW-FROM/i",$frame)) {
+                    elseif (preg_match("/allow-from/",$frame)) {
                         $uri = substr($frame,11);
                         echo color("[+] Secure : The page can only be displayed in a frame on the [ $uri ] origin .",0);
                         print_array(color("\t\t\t\tX-Frame-Options",4),$headers["x-frame-options"]);
