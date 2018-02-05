@@ -271,8 +271,11 @@ do
                 }
 
                 $headers = [];
-                isset($host['path'])?curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host'].$host['path'])
-                    :curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
+                if(isset($host['path'])){
+                    curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host'].$host['path'])
+                }
+                else
+                    curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
                 curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 10);
