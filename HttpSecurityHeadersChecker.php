@@ -481,9 +481,9 @@ do
 //Website status checker function
 function is_online($url){
     $response = file_get_contents("http://www.checksite.us/?url=$url");
-    if(preg_match("/\bWe can access\b/i",$response))
-        return true;
-    return false;
+    if(preg_match("/\bcan't\b/i",$response))
+        return false;
+    return true;
 }
 
 
