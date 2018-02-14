@@ -272,7 +272,7 @@ do
 
                 $headers = [];
                 if(isset($host['path'])){
-                    curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host'].$host['path'])
+                    curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host'].$host['path']);
                 }
                 else
                     curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
