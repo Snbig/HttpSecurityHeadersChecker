@@ -228,7 +228,7 @@ do
                 echo color("[!] Enter 0,1,2 or 3 : ", 5);
                 $answer2 = trim(fgets(STDIN));
             }
-            if ($answer2 = "1" || $answer2 == "3"){
+            if ($answer2 == "1" || $answer2 == "3"){
                 echo "[*] Enter your proxy address : (example: 127.0.0.1:8888) : ";
                 $proxy = trim(fgets(STDIN));
             }
