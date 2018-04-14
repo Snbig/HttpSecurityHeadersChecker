@@ -210,7 +210,7 @@ do
     echo "[*] Do you want to use proxy ? ([0] => No proxy , [1] => Socks5 , [2] => Tor , [3] =>Http) : ";
     $answer2 = trim(fgets(STDIN));
     switch ($answer2){
-        case 0:
+        case "0":
             break;
         case "2":
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -224,7 +224,7 @@ do
             $proxy = trim(fgets(STDIN));
             break;
         default :
-            while ($answer2 != 0 || $answer2 != 1 || $answer2 != 2 || $answer2 != 3) {
+            while ($answer2 != 0 && $answer2 != 1 && $answer2 != 2 && $answer2 != 3) {
                 echo color("[!] Enter 0,1,2 or 3 : ", 5);
                 $answer2 = trim(fgets(STDIN));
             }
