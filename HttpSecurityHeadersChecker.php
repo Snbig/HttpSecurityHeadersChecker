@@ -277,6 +277,7 @@ do
                 else
                     curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
                 curl_setopt($ch, CURLOPT_URL, $host['scheme']."://". $host['host']);
+                curl_setopt($ch,CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 10);
                 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
