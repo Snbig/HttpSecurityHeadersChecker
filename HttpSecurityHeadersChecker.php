@@ -481,8 +481,8 @@ do
 
 //Website status checker function
 function is_online($url){
-    $response = file_get_contents("http://www.checksite.us/?url=$url");
-    if(preg_match("/\bcan't\b/i",$response))
+    $response = file_get_contents("https://downforeveryoneorjustme.com/$url");
+    if(preg_match("/\bdown from here\b/i",$response))
         return false;
     return true;
 }
