@@ -50,9 +50,6 @@ To set **Socks5/Tor/Http** proxy , enter 1,2 or 3.
 [*] Do you want to use proxy ? ([0] => No proxy , [1] => Socks5 , [2] => Tor , [3] =>Http) : 2
 ```
 * _Enable Tor on your PC before using Tor as socks5 proxy ._
-# Running the test :
-![alt text](https://pasteboard.co/images/H5Ww5sR.png/download)
-
 ## Tip :
 * **Use exact target URL**<br>
 www.google.com is not as same as google.com .<br> 
