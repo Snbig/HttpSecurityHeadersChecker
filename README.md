@@ -15,7 +15,7 @@ The following contains a list of HTTP response headers related to security , dec
 * **Expect-CT**
 ### Prerequisites :
 
-To use this tool you need to insatll PHP CLI . (_PHP >=5 is OK_)
+To use this tool you need to install PHP CLI . (_PHP >=5 is OK_)
 
 ### Installing PHP CLI :
 * **Linux** : PHP CLI Pre-installed Linux.<br><br>
