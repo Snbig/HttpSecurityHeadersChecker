@@ -57,7 +57,6 @@ Or<br>
 http**s** is not as same as http And gives different results .
 ## Author
 * **Hamed** - *Initial work* - [Hamed](https://github.com/Snbig)
-* **Bitmessage** : 𝘉𝘔-2𝘤𝘝𝘳𝘗𝘈8𝘍𝘻𝘔𝘯𝘠𝘱𝘔𝘛𝘈9𝘸𝘏𝘨𝘔𝘰𝘬𝘨𝘒2𝘬𝘪𝘪𝘹𝘊2𝘍2
 
 ## License
 
